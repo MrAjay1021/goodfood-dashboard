@@ -108,5 +108,5 @@ npm test
 # 5. Start dev server
 npm run dev
 
-Time taken to complete : approximately 16–18 hours
+Time taken to complete : approximately 15–17 hours
 
