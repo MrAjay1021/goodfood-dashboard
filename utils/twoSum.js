@@ -1,11 +1,13 @@
 /**
- * twoSum - Find indices of two numbers that add up to target
- * @param {number[]} nums - Array of numbers
+ * twoSum - Find two numbers that add up to target
+ * @param {number[]} nums - Array of integers
  * @param {number} target - Target sum
- * @returns {number[]} - Indices of two numbers adding to target, or empty array if none exist
+ * @returns {number[]} - Indices of two numbers that add up to target
+ * 
+ * Time Complexity: O(n) - Single pass through array
+ * Space Complexity: O(n) - Hash map storage
  */
-function twoSum(nums, target) {
-  // Using a hash map for O(n) time complexity
+export function twoSum(nums, target) {
   const numMap = new Map()
 
   for (let i = 0; i < nums.length; i++) {
@@ -18,8 +20,5 @@ function twoSum(nums, target) {
     numMap.set(nums[i], i)
   }
 
-  // If no pair found, return empty array
   return []
 }
-
-export default twoSum

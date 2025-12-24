@@ -1,41 +1,26 @@
-"use client"
+import Card from "./card"
+import { SaladIcon, FoodPlaceholder } from "./icons/food-icons"
 
-import Card, { CardHeader } from "./card"
-import { mostOrderedFood } from "@/data/mock"
-import { SaladIcon } from "./icons/food-icons"
-
-export default function MostOrderedCard({ searchQuery = "" }) {
-  // Filter food items based on search query
-  const filteredFood = mostOrderedFood.filter((item) => item.name.toLowerCase().includes(searchQuery.toLowerCase()))
-
+export default function MostOrderedCard({ foods }) {
   return (
     <Card>
-      <CardHeader title="Most Ordered Food" subtitle="Adipiscing elit, sed do eiusmod tempor" />
+      <h3 className="font-semibold text-[#1e1e1e] mb-1">Most Ordered Food</h3>
+      <p className="text-sm text-[#A6ABC8] mb-4">
+        Adipiscing elit, sed do eiusmod tempor
+      </p>
 
-      {/* Food List */}
       <div className="space-y-4">
-        {filteredFood.length > 0 ? (
-          filteredFood.map((item, index) => (
-            <div
-              key={item.id}
-              className="flex items-center justify-between rounded-lg p-2 hover:bg-gray-50 transition-colors"
-            >
-              <div className="flex items-center gap-3">
-                {index === 0 ? (
-                  <SaladIcon className="h-12 w-12 rounded-lg object-cover" />
-                ) : (
-                  <div className="h-12 w-12 rounded-lg bg-gray-100 flex items-center justify-center">
-                    {/* Empty placeholder for manual icon placement */}
-                  </div>
-                )}
-                <span className="text-sm font-medium text-gray-900">{item.name}</span>
-              </div>
-              <span className="text-sm text-gray-500">{item.price}</span>
+        {foods.map((food, index) => (
+          <div key={food.id} className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              {index === 0 ? <SaladIcon /> : <FoodPlaceholder />}
+              <span className="text-sm text-[#1e1e1e]">{food.name}</span>
             </div>
-          ))
-        ) : (
-          <p className="text-center text-sm text-gray-500 py-4">No food items found matching "{searchQuery}"</p>
-        )}
+            <span className="text-sm text-[#A6ABC8]">
+              IDR {food.price.toLocaleString()}
+            </span>
+          </div>
+        ))}
       </div>
     </Card>
   )
