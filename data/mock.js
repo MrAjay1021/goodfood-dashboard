@@ -1,77 +1,53 @@
-export const revenueData = {
-  total: "IDR 7.852.000",
-  change: "+2.1%",
-  period: "Sales from 1-12 Dec, 2020",
-  chartData: [
-    { day: "01", value: 45 },
-    { day: "02", value: 52 },
-    { day: "03", value: 38 },
-    { day: "04", value: 65 },
-    { day: "05", value: 78 },
-    { day: "06", value: 85 },
-    { day: "07", value: 45 },
-    { day: "08", value: 38 },
-    { day: "09", value: 55 },
-    { day: "10", value: 42 },
-    { day: "11", value: 68 },
-    { day: "12", value: 35 },
-  ],
-}
+export const revenueData = [
+  { day: "01", revenue: 4000 },
+  { day: "02", revenue: 5500 },
+  { day: "03", revenue: 3800 },
+  { day: "04", revenue: 5000 },
+  { day: "05", revenue: 7500 },
+  { day: "06", revenue: 6800 },
+  { day: "07", revenue: 4200 },
+  { day: "08", revenue: 3500 },
+  { day: "09", revenue: 6000 },
+  { day: "10", revenue: 4800 },
+  { day: "11", revenue: 5200 },
+  { day: "12", revenue: 4500 },
+]
 
-export const orderTimeData = {
-  period: "From 1-6 Dec, 2020",
-  segments: [
-    { name: "Afternoon", value: 40, orders: 1890, time: "1pm - 4pm", color: "#4F46E5" },
-    { name: "Evening", value: 32, orders: 1512, time: "5pm - 9pm", color: "#818CF8" },
-    { name: "Morning", value: 28, orders: 1324, time: "8am - 12pm", color: "#C7D2FE" },
-  ],
-}
+export const orderTimeData = [
+  { name: "Afternoon", value: 40, orders: 1890, color: "#707FDD" },
+  { name: "Evening", value: 32, orders: 1512, color: "#7EC8E3" },
+  { name: "Morning", value: 28, orders: 1323, color: "#FFE5A0" },
+]
 
 export const ratingData = {
-  description: "Lorem ipsum dolor sit amet, consectetur",
-  ratings: [
-    { label: "Hygiene", value: 85, color: "#8B5CF6", size: 140 },
-    { label: "Food Taste", value: 85, color: "#60A5FA", size: 180 },
-    { label: "Packaging", value: 92, color: "#34D399", size: 120 },
-  ],
+  hygiene: 85,
+  foodTaste: 85,
+  packaging: 92,
 }
 
 export const mostOrderedFood = [
-  { id: 1, name: "Fresh Salad Bowl", price: "IDR 45.000", image: "/fresh-salad-bowl.jpg" },
-  { id: 2, name: "Chicken Noodles", price: "IDR 75.000", image: "/chicken-noodles.png" },
-  { id: 3, name: "Smoothie Fruits", price: "IDR 45.000", image: "/smoothie-fruits.jpg" },
-  { id: 4, name: "Hot Chicken Wings", price: "IDR 45.000", image: "/hot-chicken-wings.jpg" },
+  { id: 1, name: "Fresh Salad Bowl", price: 45000, image: "salad" },
+  { id: 2, name: "Chicken Noodles", price: 75000, image: "noodles" },
+  { id: 3, name: "Smoothie Fruits", price: 45000, image: "smoothie" },
+  { id: 4, name: "Hot Chicken Wings", price: 45000, image: "wings" },
 ]
 
-export const orderData = {
-  total: "2.568",
-  change: "-2.1%",
-  period: "Sales from 1-6 Dec, 2020",
-  chartData: [
-    { day: "01", value: 35 },
-    { day: "02", value: 42 },
-    { day: "03", value: 28 },
-    { day: "04", value: 55 },
-    { day: "05", value: 38 },
-    { day: "06", value: 48 },
-  ],
-}
+export const orderData = [
+  { day: "01", orders: 1800 },
+  { day: "02", orders: 2200 },
+  { day: "03", orders: 1900 },
+  { day: "04", orders: 2400 },
+  { day: "05", orders: 2100 },
+  { day: "06", orders: 2568 },
+]
 
 export const sidebarMenuItems = [
-  { id: "dashboard", label: "Dashboard", icon: "dashboard", active: true },
-  { id: "food-order", label: "Food Order", icon: "order", active: false },
-  { id: "manage-menu", label: "Manage Menu", icon: "menu", active: false },
-  { id: "customer-review", label: "Customer Review", icon: "review", active: false },
+  { id: "dashboard", label: "Dashboard", section: "MENU" },
+  { id: "food-order", label: "Food Order", section: "MENU" },
+  { id: "manage-menu", label: "Manage Menu", section: "MENU" },
+  { id: "customer-review", label: "Customer Review", section: "MENU" },
+  { id: "settings", label: "Settings", section: "OTHERS" },
+  { id: "payment", label: "Payment", section: "OTHERS" },
+  { id: "accounts", label: "Accounts", section: "OTHERS" },
+  { id: "help", label: "Help", section: "OTHERS" },
 ]
-
-export const sidebarOtherItems = [
-  { id: "settings", label: "Settings", icon: "settings", active: false },
-  { id: "payment", label: "Payment", icon: "payment", active: false },
-  { id: "accounts", label: "Accounts", icon: "accounts", active: false },
-  { id: "help", label: "Help", icon: "help", active: false },
-]
-
-export const userProfile = {
-  name: "Delicious Burger",
-  avatar: "/burger-restaurant-logo.png",
-}

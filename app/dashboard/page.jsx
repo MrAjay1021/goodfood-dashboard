@@ -8,46 +8,39 @@ import OrderTimeCard from "@/components/order-time-card"
 import RatingCard from "@/components/rating-card"
 import MostOrderedCard from "@/components/most-ordered-card"
 import OrderCard from "@/components/order-card"
+import { mostOrderedFood } from "@/data/mock"
 
 export default function DashboardPage() {
-  const [sidebarOpen, setSidebarOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState("")
 
+  const filteredFood = mostOrderedFood.filter((food) =>
+    food.name.toLowerCase().includes(searchQuery.toLowerCase())
+  )
+
   return (
-    <div className="flex min-h-screen bg-gray-50">
-      {/* Sidebar */}
-      <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
-
-      {/* Main Content */}
-      <div className="flex flex-1 flex-col lg:ml-0">
-        {/* Header */}
-        <Header searchQuery={searchQuery} onSearchChange={setSearchQuery} onMenuClick={() => setSidebarOpen(true)} />
-
-        {/* Dashboard Content */}
-        <main className="flex-1 overflow-auto p-4 lg:p-8">
-          <h1 className="mb-6 text-2xl font-bold text-gray-900">Dashboard</h1>
-
-          {/* Cards Grid */}
-          <div className="grid gap-6 lg:grid-cols-3">
-            {/* Left Column - Revenue */}
+    <div className="flex min-h-screen bg-[#f8f9fc]">
+      <Sidebar />
+      <div className="flex-1 flex flex-col">
+        <Header searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+        <main className="flex-1 p-6">
+          <h1 className="text-2xl font-semibold text-[#1e1e1e] mb-6">Dashboard</h1>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <div className="lg:col-span-2">
               <RevenueCard />
             </div>
-
-            {/* Right Column - Order Time */}
             <div>
               <OrderTimeCard />
             </div>
+          </div>
 
-            {/* Second Row */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
             <div>
               <RatingCard />
             </div>
-
             <div>
-              <MostOrderedCard searchQuery={searchQuery} />
+              <MostOrderedCard foods={filteredFood} />
             </div>
-
             <div>
               <OrderCard />
             </div>

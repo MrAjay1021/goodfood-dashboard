@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from "react"
-import { sidebarMenuItems, sidebarOtherItems } from "@/data/mock"
 import {
   DashboardIcon,
   FoodOrderIcon,
@@ -12,74 +11,84 @@ import {
   AccountsIcon,
   HelpIcon,
 } from "./icons/sidebar-icons"
-import { X } from "lucide-react"
 
-const iconMap = {
-  dashboard: DashboardIcon,
-  order: FoodOrderIcon,
-  menu: ManageMenuIcon,
-  review: CustomerReviewIcon,
-  settings: SettingsIcon,
-  payment: PaymentIcon,
-  accounts: AccountsIcon,
-  help: HelpIcon,
-}
+const menuItems = [
+  { id: "dashboard", label: "Dashboard", icon: DashboardIcon, section: "MENU" },
+  { id: "food-order", label: "Food Order", icon: FoodOrderIcon, section: "MENU" },
+  { id: "manage-menu", label: "Manage Menu", icon: ManageMenuIcon, section: "MENU" },
+  { id: "customer-review", label: "Customer Review", icon: CustomerReviewIcon, section: "MENU" },
+  { id: "settings", label: "Settings", icon: SettingsIcon, section: "OTHERS" },
+  { id: "payment", label: "Payment", icon: PaymentIcon, section: "OTHERS" },
+  { id: "accounts", label: "Accounts", icon: AccountsIcon, section: "OTHERS" },
+  { id: "help", label: "Help", icon: HelpIcon, section: "OTHERS" },
+]
 
-export default function Sidebar({ isOpen, onClose }) {
+export default function Sidebar() {
   const [activeItem, setActiveItem] = useState("dashboard")
 
-  const renderMenuItem = (item) => {
-    const Icon = iconMap[item.icon]
-    const isActive = activeItem === item.id
-
-    return (
-      <button
-        key={item.id}
-        onClick={() => setActiveItem(item.id)}
-        className={`flex w-full items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium transition-colors ${
-          isActive ? "bg-indigo-100 text-indigo-600" : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
-        }`}
-      >
-        {Icon && <Icon className="h-5 w-5" isActive={isActive} />}
-        <span>{item.label}</span>
-      </button>
-    )
-  }
+  const menuSection = menuItems.filter((item) => item.section === "MENU")
+  const othersSection = menuItems.filter((item) => item.section === "OTHERS")
 
   return (
-    <>
-      {/* Mobile overlay */}
-      {isOpen && <div className="fixed inset-0 z-40 bg-black/50 lg:hidden" onClick={onClose} />}
-
-      {/* Sidebar */}
-      <aside
-        className={`fixed left-0 top-0 z-50 flex h-full w-64 flex-col bg-white transition-transform lg:static lg:translate-x-0 ${
-          isOpen ? "translate-x-0" : "-translate-x-full"
-        }`}
-      >
-        {/* Logo */}
-        <div className="flex items-center justify-between px-6 py-5">
-          <div className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600">
-              <span className="text-sm font-bold text-white">G</span>
-            </div>
-            <span className="text-lg font-bold text-gray-900">GOODFOOD</span>
+    <aside className="hidden lg:flex flex-col w-56 bg-white border-r border-gray-100 min-h-screen">
+      <div className="p-5">
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-8 bg-[#707FDD] rounded-lg flex items-center justify-center">
+            <span className="text-white font-bold text-sm">G</span>
           </div>
-          <button onClick={onClose} className="lg:hidden">
-            <X className="h-5 w-5 text-gray-500" />
-          </button>
+          <span className="font-semibold text-[#1e1e1e]">GOODFOOD</span>
+        </div>
+      </div>
+
+      <nav className="flex-1 px-3">
+        <div className="mb-6">
+          <p className="text-xs text-[#A6ABC8] font-medium px-3 mb-2">MENU</p>
+          {menuSection.map((item) => {
+            const Icon = item.icon
+            const isActive = activeItem === item.id
+            return (
+              <button
+                key={item.id}
+                onClick={() => setActiveItem(item.id)}
+                className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg mb-1 transition-colors ${
+                  isActive
+                    ? "bg-[#707FDD] text-white"
+                    : "text-[#A6ABC8] hover:bg-gray-50"
+                }`}
+              >
+                <Icon isActive={isActive} />
+                <span className={`text-sm ${isActive ? "text-white" : ""}`}>
+                  {item.label}
+                </span>
+              </button>
+            )
+          })}
         </div>
 
-        {/* Menu Section */}
-        <div className="flex-1 overflow-y-auto px-4 py-4">
-          <p className="mb-2 px-4 text-xs font-semibold uppercase tracking-wider text-gray-400">Menu</p>
-          <nav className="space-y-1">{sidebarMenuItems.map(renderMenuItem)}</nav>
-
-          {/* Others Section */}
-          <p className="mb-2 mt-8 px-4 text-xs font-semibold uppercase tracking-wider text-gray-400">Others</p>
-          <nav className="space-y-1">{sidebarOtherItems.map(renderMenuItem)}</nav>
+        <div>
+          <p className="text-xs text-[#A6ABC8] font-medium px-3 mb-2">OTHERS</p>
+          {othersSection.map((item) => {
+            const Icon = item.icon
+            const isActive = activeItem === item.id
+            return (
+              <button
+                key={item.id}
+                onClick={() => setActiveItem(item.id)}
+                className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg mb-1 transition-colors ${
+                  isActive
+                    ? "bg-[#707FDD] text-white"
+                    : "text-[#A6ABC8] hover:bg-gray-50"
+                }`}
+              >
+                <Icon isActive={isActive} />
+                <span className={`text-sm ${isActive ? "text-white" : ""}`}>
+                  {item.label}
+                </span>
+              </button>
+            )
+          })}
         </div>
-      </aside>
-    </>
+      </nav>
+    </aside>
   )
 }

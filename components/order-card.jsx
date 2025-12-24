@@ -1,44 +1,68 @@
 "use client"
 
-import Card, { CardHeader, CardAction } from "./card"
+import Card from "./card"
 import { orderData } from "@/data/mock"
-import { TrendingDown } from "lucide-react"
-import { LineChart, Line, XAxis, ResponsiveContainer } from "recharts"
+import { LineChart, Line, XAxis, ResponsiveContainer, Tooltip } from "recharts"
 
 export default function OrderCard() {
   return (
     <Card>
-      <CardHeader title="Order" action={<CardAction>View Report</CardAction>} />
-
-      <div className="mb-1">
-        <p className="text-2xl font-bold text-gray-900">{orderData.total}</p>
-        <div className="flex items-center gap-1 mt-1">
-          <TrendingDown className="h-4 w-4 text-red-500" />
-          <span className="text-sm font-medium text-red-500">{orderData.change}</span>
-          <span className="text-sm text-gray-500">vs last week</span>
-        </div>
-        <p className="mt-2 text-xs text-gray-500">{orderData.period}</p>
+      <div className="flex items-center justify-between mb-4">
+        <h3 className="font-semibold text-[#1e1e1e]">Order</h3>
+        <button className="text-sm text-[#707FDD]">View Report</button>
       </div>
 
-      {/* Line Chart */}
-      <div className="mt-4 h-24">
+      <h2 className="text-2xl font-bold text-[#1e1e1e]">2.568</h2>
+      <p className="text-sm mb-2">
+        <span className="text-red-500">↓ 2.1%</span>
+        <span className="text-[#A6ABC8]"> vs last week</span>
+      </p>
+      <p className="text-sm text-[#A6ABC8] mb-4">Sales from 1-6 Dec, 2020</p>
+
+      <div className="h-24">
         <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={orderData.chartData}>
-            <XAxis dataKey="day" axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: "#9CA3AF" }} />
-            <Line type="monotone" dataKey="value" stroke="#4F46E5" strokeWidth={2} dot={false} />
+          <LineChart data={orderData}>
+            <XAxis
+              dataKey="day"
+              axisLine={false}
+              tickLine={false}
+              tick={{ fill: "#A6ABC8", fontSize: 12 }}
+            />
+            <Tooltip
+              contentStyle={{
+                backgroundColor: "#1e1e1e",
+                border: "none",
+                borderRadius: "8px",
+                color: "#fff",
+              }}
+            />
+            <Line
+              type="monotone"
+              dataKey="orders"
+              stroke="#707FDD"
+              strokeWidth={2}
+              dot={false}
+            />
+            <Line
+              type="monotone"
+              dataKey="orders"
+              stroke="#A6ABC8"
+              strokeWidth={2}
+              strokeDasharray="5 5"
+              dot={false}
+            />
           </LineChart>
         </ResponsiveContainer>
       </div>
 
-      {/* Legend */}
-      <div className="mt-4 flex items-center gap-4">
+      <div className="flex items-center gap-6 mt-4">
         <div className="flex items-center gap-2">
-          <span className="h-2 w-2 rounded-full bg-indigo-600" />
-          <span className="text-xs text-gray-500">Last 6 days</span>
+          <div className="w-3 h-3 rounded-full bg-[#707FDD]"></div>
+          <span className="text-sm text-[#A6ABC8]">Last 6 days</span>
         </div>
         <div className="flex items-center gap-2">
-          <span className="h-2 w-2 rounded-full bg-gray-300" />
-          <span className="text-xs text-gray-500">Last Week</span>
+          <div className="w-3 h-3 rounded-full bg-gray-200"></div>
+          <span className="text-sm text-[#A6ABC8]">Last Week</span>
         </div>
       </div>
     </Card>

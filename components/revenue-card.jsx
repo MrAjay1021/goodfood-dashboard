@@ -1,48 +1,66 @@
 "use client"
 
-import Card, { CardHeader, CardAction } from "./card"
+import Card from "./card"
 import { revenueData } from "@/data/mock"
-import { TrendingUp } from "lucide-react"
-import { BarChart, Bar, XAxis, ResponsiveContainer, Cell } from "recharts"
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  ResponsiveContainer,
+  Tooltip,
+} from "recharts"
 
 export default function RevenueCard() {
   return (
     <Card>
-      <CardHeader title="Revenue" action={<CardAction>View Report</CardAction>} />
-
-      <div className="mb-1">
-        <p className="text-2xl font-bold text-gray-900">{revenueData.total}</p>
-        <div className="flex items-center gap-1 mt-1">
-          <TrendingUp className="h-4 w-4 text-emerald-500" />
-          <span className="text-sm font-medium text-emerald-500">{revenueData.change}</span>
-          <span className="text-sm text-gray-500">vs last week</span>
+      <div className="flex items-center justify-between mb-4">
+        <div>
+          <p className="text-sm text-[#A6ABC8]">Revenue</p>
+          <h2 className="text-2xl font-bold text-[#1e1e1e]">IDR 7.852.000</h2>
+          <p className="text-sm">
+            <span className="text-green-500">↑ 2.1%</span>
+            <span className="text-[#A6ABC8]"> vs last week</span>
+          </p>
         </div>
-        <p className="mt-2 text-xs text-gray-500">{revenueData.period}</p>
+        <button className="px-4 py-2 text-sm text-[#707FDD] border border-[#707FDD] rounded-lg hover:bg-[#707FDD] hover:text-white transition-colors">
+          View Report
+        </button>
       </div>
 
-      {/* Bar Chart */}
-      <div className="mt-4 h-40">
+      <p className="text-sm text-[#A6ABC8] mb-4">Sales from 1-12 Dec, 2020</p>
+
+      <div className="h-48">
         <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={revenueData.chartData}>
-            <XAxis dataKey="day" axisLine={false} tickLine={false} tick={{ fontSize: 12, fill: "#9CA3AF" }} />
-            <Bar dataKey="value" radius={[4, 4, 0, 0]}>
-              {revenueData.chartData.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={index === 5 ? "#4F46E5" : "#C7D2FE"} />
-              ))}
-            </Bar>
+          <BarChart data={revenueData}>
+            <XAxis
+              dataKey="day"
+              axisLine={false}
+              tickLine={false}
+              tick={{ fill: "#A6ABC8", fontSize: 12 }}
+            />
+            <YAxis hide />
+            <Tooltip
+              contentStyle={{
+                backgroundColor: "#1e1e1e",
+                border: "none",
+                borderRadius: "8px",
+                color: "#fff",
+              }}
+            />
+            <Bar dataKey="revenue" fill="#707FDD" radius={[4, 4, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
       </div>
 
-      {/* Legend */}
-      <div className="mt-4 flex items-center gap-4">
+      <div className="flex items-center gap-6 mt-4">
         <div className="flex items-center gap-2">
-          <span className="h-2 w-2 rounded-full bg-indigo-600" />
-          <span className="text-xs text-gray-500">Last 6 days</span>
+          <div className="w-3 h-3 rounded-full bg-[#707FDD]"></div>
+          <span className="text-sm text-[#A6ABC8]">Last 6 days</span>
         </div>
         <div className="flex items-center gap-2">
-          <span className="h-2 w-2 rounded-full bg-gray-300" />
-          <span className="text-xs text-gray-500">Last Week</span>
+          <div className="w-3 h-3 rounded-full bg-gray-200"></div>
+          <span className="text-sm text-[#A6ABC8]">Last Week</span>
         </div>
       </div>
     </Card>
